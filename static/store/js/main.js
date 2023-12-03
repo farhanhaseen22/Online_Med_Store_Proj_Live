@@ -1,4 +1,6 @@
 
+let endpoint = "https://onlinemedstolive.onrender.com"
+
 // Inserting an item in the cart //
 
 $('.update_cart').click(function(e){
@@ -20,7 +22,7 @@ $('.update_cart').click(function(e){
 			$.ajax(
 			{ 
 				type:"POST", 
-				url: "http://127.0.0.1:8000/insert_cart/",
+				url: endpoint+"insert_cart/",
 				data:{ 
 						'product_id' : product_id,
 						'item_quantity' : item_quantity.toString(),
@@ -47,7 +49,7 @@ $('.update_cart_B').click(function(e){
 	$.ajax(
 	{ 
 		type:"POST", 
-		url: "http://127.0.0.1:8000/insert_cart/",
+		url: endpoint+"insert_cart/",
 		data:{ 
 				'product_id' : product_id,
 				'item_quantity' : item_quantity,
@@ -98,7 +100,7 @@ $('.add_to_favs').click(function(e){
 	$.ajax( 
 	{ 
 	    type:"POST", 
-	    url: "http://127.0.0.1:8000/add_to_favs/",
+	    url: endpoint+"add_to_favs/",
 	    data:{ 
 	      		'product_id' : product_id,
 	      		'csrfmiddlewaretoken' : '{{ csrf_token }}',
@@ -133,7 +135,7 @@ $('.rating_submit_btn').click(function(e){
 		$.ajax(
 		{ 
 			type:"POST", 
-			url: "http://127.0.0.1:8000/update_rating/",
+			url: endpoint+"update_rating/",
 			data:{ 
 						'product_id' : product_id,
 						'selected_rating' : selected_rating,
@@ -196,7 +198,7 @@ $('#enter-recommendation').click(function(e){
 
 	$.ajax({
 		type:"POST", 
-		url: "http://127.0.0.1:8000/selection_for_recom/",
+		url: endpoint+"selection_for_recom/",
 		data:{ 
 					'productid_part' : productid_part,
 					'choosing_part' : choosing_part,

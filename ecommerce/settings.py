@@ -116,8 +116,14 @@ DATABASES = {
 }
 
 
-CORS_ALLOWED_ORIGINS = ['*']
-CORS_ORIGIN_ALLOW_ALL = True
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = default_headers + (
+    "custom-headers",
+   
+)
+
+CORS_ORIGIN_WHITELIST = ("http://localhost:8000", "https://onlinemedstolive.onrender.com")
 
 
 # Password validation
