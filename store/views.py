@@ -17,6 +17,9 @@ from django.http import HttpResponse , HttpResponseRedirect ,Http404
 from django.urls import reverse
 import datetime
 
+import random
+import os
+
 
 # Now, we create user-item matrix using scipy csr matrix
 def create_matrix(df, choosing):
@@ -612,3 +615,104 @@ def update_address(request,id):
     }
 
     return render(request ,'store/update_address.html',context)
+
+
+
+def inserting_data_in_Product_table(request):
+
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    file_path = os.path.join(base_dir, 'drugs_for_common_treatments.csv')
+    drugs_data = pd.read_csv(file_path)
+    drugs_data = drugs_data.drop(['activity','no_of_reviews','rating','medical_condition_description','rx_otc','pregnancy_category','csa','alcohol','medical_condition_url','drug_link'], axis=1)
+
+    price_set = [80, 100, 150, 200, 250, 300]
+
+    image_names = [
+        'BenzonatateBottles_100_100.jpg',
+        'Benzonatate_Cat_FptSOq5.jpg',
+        'Product-14302152460.jpg',
+        'Ventolin_Nebules6001PPS0.JPG',
+        'formoterol-fumarate-and-budesonide-inhaler-2_1661769687.jpg',
+        'VILANTEROL.jpg',
+        'Dextromethorphan.jpg',
+        'BenzonatateBottles_100_100_XixoP36.jpg',
+        '000938943_PB.jpg',
+        'image-2_11.png',
+        'prod-1-502.png',
+        'image-2_11_mnOAwwI.png',
+        'prod-1-502_f97QIPj.png',
+        'Product-14302152460.jpg'
+    ]
+
+    description_set = [
+        'Antiarrhythmics are medications that prevent and treat a heart rhythm that’s too fast or irregular. They can reduce symptoms and help avoid life-threatening complications. Some of these drugs stop irregular, extra electrical impulses. Most antiarrhythmics are intended for long-term use.',
+        'Drug opposed to antiarrhythmic drugs may be prescribed if your heart beats too slowly (bradycardia). Antiarrhythmic drugs may be prescribed if your heart beats too quickly. Antiarrhythmics include several classes of drugs which are listed below',
+        'Theophylline may make these conditions worse. In people with liver problems, it can sometimes lead to a dangerous build-up of medication in the body. Other medicines can also cause an abnormal build-up of theophylline in the body. Migraine',
+        'Knowing what cold and flu medicines do helps you choose the best medication for your symptoms. Decongestants help clear stuffed-up nasal passages and airways. Analgesics treat pain and fever.',
+        'Decongestants help clear stuffed-up nasal passages and airways. Analgesics treat pain and fever. Cough suppressants treat dry coughs. They also quiet a cough so you can sleep. Expectorants loosen up phlegm in your lungs and help it drain. They are good during the day for wet coughs.'
+    ]
+
+    for index, row in drugs_data.iterrows():
+        if 0 < index <= 1:
+        # if 1 < index <= 1712:
+            drug_name = row['drug_name']
+            medi_cond = row['medical_condition']
+
+            rn_p = random.choice(price_set)
+            rn_i = random.choice(image_names)
+            rn_d = random.choice(description_set)
+            
+            
+            item = Product.objects.create(
+                  name = drug_name,
+                    price = rn_p,
+                    image = rn_i,
+                    description = rn_d,
+                    subcategory = medi_cond,
+            )
+            item.save()
+
+    return HttpResponse(f"All ok from this Product_table!")
+
+
+def inserting_data_in_Item_Rating_table(request):
+    rating_set = [1, 2, 3, 4, 5]
+    u_ids = [1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+    for p_index in range(1,312):
+        for u_index in range(0,10):
+            randRate = random.choice(rating_set)
+
+            print(f"""INSERT INTO `medistore`.`store_item_rating` (`rating`, `created_at`, `updated_at`, `product_id`, `user_id`) VALUES
+                ({randRate}, \"2023-11-19 02:31:48.135941\", \"2023-11-19 02:31:48.135941\", {p_index}, {u_ids[u_index]});
+                """)
+            print()
+
+            item = Item_Rating.objects.create(
+                rating = randRate,
+                created_at = "2023-11-19 02:31:48.135941",
+                updated_at = "2023-11-19 02:31:48.135941",
+                product_id = p_index,
+                user_id = u_ids[u_index],
+            )
+            item.save()
+    
+    return HttpResponse(f"All ok from Item_Rating_table!")
+
+
+def inserting_data_in_ProdCatego_table(request):
+    
+    col_1 = [1, 2, 3, 4, 5, 6, 7]
+    col_2 = ['Diarrhea', 'Conjunctivitis', 'Colds and Flu', 'Allergies', 'Mononucleosis', 'Stomach Aches', 'Headaches']
+    col_3 = ['diarr_relif.png', 'pink-eye-medicine-hero.jpg', 'before-you-treat-your-cold-770747-color01-a8a578b52f38490ab675b6e923725586.jpg', '71j2yuIJ6SL._AC_UF10001000_QL80_.jpg', 'FT-Expectorants-and-Mucolytics-Nursing-Pharmacology-Study-Guide.png', 'Ventolin_Nebules6001PPS0_d4eyc4U.JPG', 'Headaches-1.png']
+
+    for index, value in enumerate(col_1):
+        
+        item = ProductCategories.objects.create(
+            id = value,
+            name = col_2[index],
+            image = col_3[index],
+        )
+        item.save()
+
+    return HttpResponse(f"All ok from ProdCatego_table!")

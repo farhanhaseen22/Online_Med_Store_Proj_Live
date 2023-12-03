@@ -23,4 +23,9 @@ urlpatterns = [
 
     path('recommendation_system/',views.recom_page,name='recom_page'),
     path('selection_for_recom/',views.selection_for_recom,name='selection_for_recom'),
+
+
+    path('inserting_data_in_Product_table/',views.inserting_data_in_Product_table,name='inserting_data_in_Product_table'),
+    path('inserting_data_in_Item_Rating_table/',views.inserting_data_in_Item_Rating_table,name='inserting_data_in_Item_Rating_table'),
+    path('inserting_data_in_ProdCatego_table/',views.inserting_data_in_ProdCatego_table,name='inserting_data_in_ProdCatego_table'),
 ]
