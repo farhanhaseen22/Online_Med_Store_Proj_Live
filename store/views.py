@@ -653,8 +653,8 @@ def inserting_data_in_Product_table(request):
     ]
 
     for index, row in drugs_data.iterrows():
-        if 0 < index <= 1:
-        # if 1 < index <= 1712:
+        # if 0 < index <= 1:
+        if 1 < index <= 1712:
             drug_name = row['drug_name']
             medi_cond = row['medical_condition']
 
