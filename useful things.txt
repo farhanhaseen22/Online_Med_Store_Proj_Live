@@ -123,3 +123,6 @@ pip install gunicorn
 Open web service in Render, connect github repo with Render web service
 
 pip install whitenoise
+rearranging lines of code, for whitenoise
+AND remember to apply the following:
+python manage.py collectstatic

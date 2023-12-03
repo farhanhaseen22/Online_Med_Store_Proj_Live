@@ -677,7 +677,7 @@ def inserting_data_in_Product_table(request):
 
 def inserting_data_in_Item_Rating_table(request):
     rating_set = [1, 2, 3, 4, 5]
-    u_ids = [1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    u_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     for p_index in range(1,312):
         for u_index in range(0,10):
