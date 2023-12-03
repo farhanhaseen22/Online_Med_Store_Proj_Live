@@ -121,3 +121,5 @@ ALLOWED_HOSTS
 pip install gunicorn
 
 Open web service in Render, connect github repo with Render web service
+
+pip install whitenoise
