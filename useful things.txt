@@ -1,0 +1,123 @@
+First, redirect the output of pip freeze to a file named requirements.txt.
+
+pip freeze > requirements.txt
+
+Next, copy or move this requirements.txt to the other environment and use it to install the packages.
+
+pip install -r requirements.txt
+pip uninstall -y -r requirements.txt
+
+===================Create & Start virtual environment==========================
+
+py -m venv venv
+venv\Scripts\activate
+
+===============================================================================
+
+Now execute these commands:
+$ python manage.py shell
+
+Then the interactive python shell with django powers will appear. Then type in:
+$ from django.contrib.auth.models import User
+$ User.objects.get(username="NameHere", is_superuser=True).delete()
+
+You should replace the name of the superuser you created with NameHere in the last command.
+
+====================================================================================================
+
+python manage.py createsuperuser
+
+.\venv\Scripts\activate
+python manage.py runserver
+
+Go to http://127.0.0.1:8000/admin/
+
+====================================================================================================
+create database Medistore;
+
+python manage.py makemigrations store --name ADDED_description_AGAIN_in_Purchased_Item
+
+python manage.py makemigrations
+
+python manage.py showmigrations
+
+====================================================================================================
+git remote rm origin
+
+git remote add origin
+
+Username and Password don't work anymore, 
+instead you have to use your Personal access tokens, like so,
+set-url
+git remote get-url origin
+git remote add origin https://PERSONAL_ACCESS_TOKEN@https://github.com/farhanhaseen22/Online_Med_Store_Proj.git
+
+====================================================================================================
+List your git config:
+
+git config --list
+git config --list --show-origin
+
+Change username and email global:
+
+git config --global user.name ""
+git config --global user.email ""
+
+Change username and email for current repo:
+
+git config  user.name ""
+git config  user.email ""
+
+
+rm store/migrations/0019_ALTERED_also_tryin_todeluserid.py
+rm store/migrations/0021_auto_20231126_1940.py
+
+"E:\\6th Semester - Spring - MUN - 2023\\ENGI 981B\\Medistore_cln\\venv",
+
+
+create database Medistore;
+use medistore;
+
+===========================================================
+
+heroku cli installed
+pip install gunicorn whitenoise
+setting up whitenoise
+
+create new git repo
+heroku cli uninstalled
+
+push files into that repo - x
+
+===========================================================
+
+database inserts:->
+views
+urls
+settings
+create admin
+
+One solution is to downgrade psycopg2 (or psycopg2-binary if you are using the stand-alone package) below 2.9 (e.g. psycopg2>=2.8,<2.9) in your requirements file.
+using:
+pip install psycopg2==2.8.6
+pip install psycopg2-binary dj_database_url django-environ
+
+Then wrote this:
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
+import dj_database_url
+DATABASES = {
+    'default': dj_database_url.parse(env('DATABASE_URL'))
+}
+
+python manage.py migrate
+python manage.py createsuperuser
+
+DEBUG
+ALLOWED_HOSTS
+
+pip install gunicorn
+
+Open web service in Render, connect github repo with Render web service
