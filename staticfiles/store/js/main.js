@@ -1,5 +1,6 @@
 
-let endpoint = "https://onlinemedstolive.onrender.com"
+let endpoint = "https://onlinemedstolive.onrender.com/"
+
 
 // Inserting an item in the cart //
 
